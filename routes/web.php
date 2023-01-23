@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// import controllers
+use App\Http\Controllers\Books\BookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::view('/', 'home');
+
+// Books Routing
+// 'dashboard.books.index'
+Route::post('books', [BookController::class, 'index'])->name('books');
+Route::resource('books', BookController::class);
+Route::view('dashboard', 'dashboard.dashboard')->name('dashboard');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
